@@ -1,0 +1,11 @@
+{
+  "name": "name",
+  "description": "description",
+  "authors": "author",
+  "version": "1.0.0",
+  "main": "pathToMain",
+  "dependencies": {
+    "inquirer": "^9.2.12",
+    "mysql2": "^3.8.0"
+  }
+}
