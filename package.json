@@ -3,9 +3,14 @@
   "description": "description",
   "authors": "author",
   "version": "1.0.0",
-  "main": "pathToMain",
+  "main": "start.js",
+  "scripts": {
+    "start": "nodemon start.js"
+  },
   "dependencies": {
+    "dotenv": "^16.4.1",
     "inquirer": "^9.2.12",
-    "mysql2": "^3.8.0"
+    "mysql2": "^3.8.0",
+    "nodemon": "^3.0.3"
   }
 }
