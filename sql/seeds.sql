@@ -18,11 +18,11 @@ INSERT INTO role(title, salary, department_id)
 
 INSERT INTO employee(first_name, last_name, role_id, manager_id)
   VALUES
-    ("Emily", "Johnson", 3, NULL),
-    ("Benjamin", "Anderson", 4, 1),
-    ("Sophia", "Martinez", 1, NULL),
-    ("Jackson", "Williams", 2, 3),
-    ("Olivia", "Brown", 7, NULL),
-    ("Liam", "Davis", 8, 5),
-    ("Ava", "Taylor", 5, NULL),
-    ("Ethan", "Moore", 6, 7);
+    ("Emily", "Johnson", 1, NULL),
+    ("Benjamin", "Anderson", 2, 1),
+    ("Sophia", "Martinez", 3, NULL),
+    ("Jackson", "Williams", 4, 3),
+    ("Olivia", "Brown", 5, NULL),
+    ("Liam", "Davis", 6, 5),
+    ("Ava", "Taylor", 7, NULL),
+    ("Ethan", "Moore", 8, 7);
