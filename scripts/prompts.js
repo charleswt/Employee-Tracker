@@ -1,7 +1,7 @@
-import { viewAllDepartmentsQuery, viewAllRolesQuery, viewAllEmployeesQuery, addDepartmentQuery, addRoleQuery, addEmployeeQuery, updateEmployeeRoleQuery } from "./controllers/sqlCommands.js"
+const { viewAllDepartmentsQuery, viewAllRolesQuery, viewAllEmployeesQuery, addDepartmentQuery, addRoleQuery, addEmployeeQuery, updateEmployeeRoleQuery } = require ("./controllers/sqlCommands.js")
 
 viewAllDepartments = ()=>{
-
+    
 }
 viewAllRoles = ()=>{
 

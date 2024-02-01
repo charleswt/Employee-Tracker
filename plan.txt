@@ -1,6 +1,0 @@
-make a start.js to initiate prompt.
-config folder and .env to ensure the usage/connection of sql.
-controllers prompt.js will have my initial prompt with a swith so when a choice is selected the necessary function will be called then giving another prompt and depending on the choice the necessary query will be called in query.js
-the router gets all separate files and routes them to start.js
-sql schema.sql creates our database
-sql seeds.sql holds database information

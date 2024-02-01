@@ -1,21 +1,23 @@
 require('dotenv').config();
-const mysql = inquire('mysql2');
+const mysql = require('mysql2');
 
 const sqlDb = mysql.createConnection(
+    process.env.DB_NAME,
+    process.env.DB_USER,
+    process.env.DB_PASSWORD,
     {
-        host: process.env.DB_HOST,
-        user: process.env.DB_USER,
-        database: process.env.DB_NAME,
-        password: process.env.DB_PASSWORD
-    },
-   
-)
+      host: 'localhost',
+      dialect: 'mysql',
+      port: 3306
+    }
+);
 
 sqlDb.connect((err) => {
-    if (err) {
-      console.error('Error connecting to employee_db', err);
-      return;
-    }
+  if (err) {
+    return console.error('Error connecting to work_db', err);
+    
+  }
+  console.log('Stable connection established with work_db!');
 });
-    console.log('Stable connection established with employee_db!')
+
 module.exports = sqlDb.promise();
