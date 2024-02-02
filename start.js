@@ -1,29 +1,40 @@
-const { viewAllDepartments, viewAllRoles, viewAllEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole, menu } = require("/controllers/prompts.js")
+const { viewAllDepartments, viewAllRoles, viewAllEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole, menu } = require('./scripts/prompts');
 
-const userInput = inquirer.prompt([
+const mainMenu = async () => {
+  const userInput = await inquirer.prompt([
     {
-      type: 'input',
+      type: 'list',
       message: 'What would you like to do?',
       name: 'userInput',
-      choices: ["view all departments","view all roles","view all employees","add a department","add a role","add an employee","update an employee role"]
+      choices: ["view all departments","view all roles","view all employees","add a department","add a role","add an employee","update an employee role","Main Menu"]
     },
-])
+  ]);
 
-switch (userInput){
+  switch (userInput.userInput) {
     case 'view all departments': 
-    return viewAllDepartments()
+      return viewAllDepartments();
+
     case 'view all roles': 
-    return viewAllRoles()
+      return viewAllRoles();
+
     case 'view all employees':
-    return viewAllEmployees() 
+      return viewAllEmployees();
+
     case 'add a department': 
-    return addDepartment()
+      return addDepartment();
+
     case 'add a role': 
-    return addRole()
+      return addRole();
+
     case 'add an employee': 
-    return addEmployee()
+      return addEmployee();
+
     case 'update an employee role': 
-    return updateEmployeeRole()
+      return updateEmployeeRole();
+
     case 'Main Menu':
-    return menu()
+      return menu();
+  }
 };
+
+mainMenu()

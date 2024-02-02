@@ -20,4 +20,4 @@ sqlDb.connect((err) => {
   console.log('Stable connection established with work_db!');
 });
 
-module.exports = sqlDb.promise();
+module.exports = sqlDb;

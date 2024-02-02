@@ -4,7 +4,6 @@
   "authors": "author",
   "version": "1.0.0",
   "main": "start.js",
-  "type": "module",
   "scripts": {
     "start": "nodemon start.js"
   },
