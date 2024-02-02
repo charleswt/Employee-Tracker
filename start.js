@@ -1,4 +1,13 @@
-const { viewAllDepartments, viewAllRoles, viewAllEmployees, addDepartment, addRole, addEmployee, updateEmployeeRole, menu } = require('./scripts/prompts');
+const {
+  viewAllDepartments,
+  viewAllRoles, 
+  viewAllEmployees, 
+  addDepartment, 
+  addRole, 
+  addEmployee, 
+  updateEmployeeRole, 
+  menu 
+} = require('./scripts/prompts.js');
 
 const mainMenu = async () => {
   const userInput = await inquirer.prompt([

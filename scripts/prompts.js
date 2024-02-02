@@ -3,18 +3,18 @@ const { viewAllDepartmentsQuery, viewAllRolesQuery, viewAllEmployeesQuery, addDe
 
 viewAllDepartments = async ()=>{
     const departmentsPrompt = await viewAllDepartmentsQuery();
-    console.table(departmentsPrompt);
+    console.log(departmentsPrompt);
     if(err){console.error(err, menu(menuPrompt.message = 'Error retrieving data table, press ENTER to return to the menu.'))}
 }
-viewAllRoles=async ()=>{
+viewAllRoles = async ()=>{
     const departmentsPrompt = await viewAllRolesQuery();
-    console.table(departmentsPrompt);
+    console.log(departmentsPrompt);
     if(err){console.error(err, menu(menuPrompt.message = 'Error retrieving data table, press ENTER to return to the menu.'))}
 
 }
 viewAllEmployees = async ()=>{
     const departmentsPrompt = await viewAllEmployeesQuery();
-    console.table(departmentsPrompt);
+    console.log(departmentsPrompt);
     if(err){console.error(err, menu(menuPrompt.message = 'Error retrieving data table, press ENTER to return to main menu.'))}
 }
 addDepartment = async ()=>{
@@ -43,7 +43,7 @@ addRole = async ()=>{
         {
             type: 'input',
             name: 'add_Role_Department',
-            message: 'Select department:',
+            message: 'Choose department:',
             choices: departmentForRole.map((department) => ({
                 name: department.name,
                 value: department.id,
@@ -54,17 +54,59 @@ addRole = async ()=>{
     await addRoleQuery({ add_Role, add_Role_Salary, add_Role_Id })
 }
 addEmployee = async ()=>{
-    const { add_Department } = await inquirer.prompt([
+    const roleForEmployee = await viewAllRolesQuery()
+    const { add_Employee_FirstName, add_Employee_LastName, add_Employee_roleId,add_Employee_ManagerId } = await inquirer.prompt([
         {
             type: 'input',
-            name: 'add_Department',
-            message: 'Input department name:',
+            name: 'add_Employee_FirstName',
+            message: 'Input employees first name:',
+        },
+        {
+            type: 'input',
+            name: 'add_Employee_LastName',
+            message: 'Input employees last name:',
+        },
+        {
+            type: 'input',
+            name: 'add_Employee_roleId',
+            message: 'Choose employee role id:',
+            choices: roleForEmployee.map((role) => ({
+                name: role.name,
+                value: role.id,
+            }))
+        },
+        {
+            type: 'input',
+            name: 'add_Employee_ManagerId',
+            message: 'Input employee manager id:',
         },
     ])
-    await addRoleQuery({ add_Department })
+    await addEmployeeQuery({ add_Employee_FirstName, add_Employee_LastName, add_Employee_roleId,add_Employee_ManagerId })
 }
 updateEmployeeRole = async ()=>{
-
+    const viewEmployeeToUpdate = await viewAllEmployeesQuery()
+    const roleForEmployee = await viewAllRolesQuery()
+    const { select_employee, update_Employee_roleId } = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'select_employee',
+            message: "Choose employee's role you would like to change:",
+            choices: viewEmployeeToUpdate.map((employee) => ({
+            name: `${employee.first_name} ${employee.last_name}`,
+            value: employee.id,
+            }))
+        },
+        {
+            type: 'input',
+            name: 'update_Employee_roleId',
+            message: 'Choose employee role id:',
+            choices: roleForEmployee.map((role) => ({
+            name: role.name,
+            value: role.id,
+            }))
+        },
+    ])
+    await updateEmployeeRoleQuery({ select_employee, update_Employee_roleId })
 }
 menu = ()=>{
     menuPrompt = inquirer.prompt([
