@@ -1,23 +1,19 @@
 require('dotenv').config();
-const mysql = require('mysql2');
+const mysql = require('mysql2/promise');
 
-const sqlDb = mysql.createConnection(
-    process.env.DB_NAME,
-    process.env.DB_USER,
-    process.env.DB_PASSWORD,
-    {
-      host: 'localhost',
-      dialect: 'mysql',
-      port: 3306
-    }
-);
-
-sqlDb.connect((err) => {
-  if (err) {
-    return console.error('Error connecting to work_db', err);
-    
-  }
-  console.log('Stable connection established with work_db!');
+const sqlDb = mysql.createPool({
+  host: 'localhost',
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: 3306
 });
+
+// Optionally, you can listen for errors on the pool
+sqlDb.on('error', (err) => {
+  console.error('Database pool error:', err);
+});
+
+console.log('Stable connection established with work_db!');
 
 module.exports = sqlDb;

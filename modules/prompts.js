@@ -1,23 +1,31 @@
 const inquirer = require('inquirer');
-const { viewAllDepartmentsQuery, viewAllRolesQuery, viewAllEmployeesQuery, addDepartmentQuery, addRoleQuery, addEmployeeQuery, updateEmployeeRoleQuery } = require('./scripts/sqlCommands')
+const { viewAllDepartmentsQuery, viewAllRolesQuery, viewAllEmployeesQuery, addDepartmentQuery, addRoleQuery, addEmployeeQuery, updateEmployeeRoleQuery } = require('./sqlCommands')
 
-viewAllDepartments = async ()=>{
+const viewAllDepartments = async ()=>{
+    try{
     const departmentsPrompt = await viewAllDepartmentsQuery();
-    console.log(departmentsPrompt);
-    if(err){console.error(err, menu(menuPrompt.message = 'Error retrieving data table, press ENTER to return to the menu.'))}
+    console.table(departmentsPrompt);
+}catch(err){
+    return menu()
 }
-viewAllRoles = async ()=>{
+}
+const viewAllRoles = async ()=>{
+    try{
     const departmentsPrompt = await viewAllRolesQuery();
-    console.log(departmentsPrompt);
-    if(err){console.error(err, menu(menuPrompt.message = 'Error retrieving data table, press ENTER to return to the menu.'))}
-
+    console.table(departmentsPrompt);
+}catch(err){
+    return menu()
 }
-viewAllEmployees = async ()=>{
+}
+const viewAllEmployees = async ()=>{
+    try{
     const departmentsPrompt = await viewAllEmployeesQuery();
-    console.log(departmentsPrompt);
-    if(err){console.error(err, menu(menuPrompt.message = 'Error retrieving data table, press ENTER to return to main menu.'))}
+    console.table(departmentsPrompt);
+}catch(err){
+    return menu()
 }
-addDepartment = async ()=>{
+}
+const addDepartment = async ()=>{
     const { add_Department } = await inquirer.prompt([
         {
             type: 'input',
@@ -27,7 +35,7 @@ addDepartment = async ()=>{
     ])
     await addDepartmentQuery({ add_Department })
 }
-addRole = async ()=>{
+const addRole = async ()=>{
     const departmentForRole = await viewAllDepartmentsQuery()
     const { add_Role, add_Role_Salary, add_Role_Id } = await inquirer.prompt([
         {
@@ -53,7 +61,7 @@ addRole = async ()=>{
     ])
     await addRoleQuery({ add_Role, add_Role_Salary, add_Role_Id })
 }
-addEmployee = async ()=>{
+const addEmployee = async ()=>{
     const roleForEmployee = await viewAllRolesQuery()
     const { add_Employee_FirstName, add_Employee_LastName, add_Employee_roleId,add_Employee_ManagerId } = await inquirer.prompt([
         {
@@ -83,7 +91,7 @@ addEmployee = async ()=>{
     ])
     await addEmployeeQuery({ add_Employee_FirstName, add_Employee_LastName, add_Employee_roleId,add_Employee_ManagerId })
 }
-updateEmployeeRole = async ()=>{
+const updateEmployeeRole = async ()=>{
     const viewEmployeeToUpdate = await viewAllEmployeesQuery()
     const roleForEmployee = await viewAllRolesQuery()
     const { select_employee, update_Employee_roleId } = await inquirer.prompt([
@@ -108,16 +116,17 @@ updateEmployeeRole = async ()=>{
     ])
     await updateEmployeeRoleQuery({ select_employee, update_Employee_roleId })
 }
-menu = ()=>{
-    menuPrompt = inquirer.prompt([
-        {
-          type: 'input',
-          name: 'menu',
-          message,
-          choice: [ 'Main menu' ]
-        },
-      ]);
-}
+
+const menu = async (errorMessage = 'Error retrieving data table, press ENTER to return to main menu.') => {
+  await inquirer.prompt([
+    {
+      type: 'input',
+      name: 'menu',
+      message: errorMessage,
+      choices: ['Main menu'],
+    },
+  ]);
+};
 
 module.exports = { 
     viewAllDepartments,
