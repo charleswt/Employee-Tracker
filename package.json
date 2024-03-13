@@ -3,7 +3,6 @@
   "description": "Work database and command prompt",
   "authors": "Charles Tiffany",
   "version": "1.0.0",
-  "type": "commonjs",
   "main": "start.js",
   "scripts": {
     "start": "nodemon start.js"

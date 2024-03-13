@@ -40,17 +40,17 @@ const addDepartmentQuery = async (add_Department) => {
   }
 };
 
-const addRoleQuery = async ({ add_Role, add_Role_Salary, add_Role_Id }) => {
-    const query = 'INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)';
+const addRoleQuery = async (add_Role, add_Role_Salary, add_Role_Id) => {
+  const query = 'INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)';
   try {
-    const addRole = await sqlDb.query(query, [add_Role, add_Role_Salary, add_Role_Id]);
-    return addRole[0];
+      const addRole = await sqlDb.query(query, [add_Role, add_Role_Salary, add_Role_Id]);
+      return addRole[0];
   } catch (err) {
-    console.error('Error adding role:', err);
+      console.error('Error adding role:', err);
   }
 };
 
-const addEmployeeQuery = async ({ add_Employee_FirstName, add_Employee_LastName, add_Employee_roleId, add_Employee_ManagerId }) => {
+const addEmployeeQuery = async (add_Employee_FirstName, add_Employee_LastName, add_Employee_roleId, add_Employee_ManagerId) => {
     const query = 'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)';
   try {
     const addEmployee = await sqlDb.query(query, [add_Employee_FirstName, add_Employee_LastName, add_Employee_roleId, add_Employee_ManagerId]);
@@ -60,7 +60,7 @@ const addEmployeeQuery = async ({ add_Employee_FirstName, add_Employee_LastName,
   }
 };
 
-const updateEmployeeRoleQuery = async ({ update_Employee_roleId, select_employee }) => {
+const updateEmployeeRoleQuery = async (update_Employee_roleId, select_employee) => {
     const query = 'UPDATE employee SET role_id = ? WHERE id = ?';
   try {
     const updateEmployee = await sqlDb.query(query, [update_Employee_roleId, select_employee]);

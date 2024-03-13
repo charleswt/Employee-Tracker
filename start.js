@@ -15,7 +15,7 @@ const mainMenu = async () => {
       type: 'list',
       message: 'What would you like to do?',
       name: 'userInput',
-      choices: ["View all departments", "View all roles","View all employees","Add a department","Add a roles","Add an employee","Update an employee roles"]
+      choices: ["View all departments", "View all roles","View all employees","Add a department","Add a role","Add an employee","Update an employee role"]
     },
   ]);
 
@@ -36,7 +36,7 @@ const mainMenu = async () => {
       await addDepartment();
       mainMenu();
       break;
-    case 'Add a roles': 
+    case 'Add a role': 
       await addRole();
       mainMenu();
       break;
@@ -44,7 +44,7 @@ const mainMenu = async () => {
       await addEmployee();
       mainMenu();
       break;
-    case 'Update an employee roles': 
+    case 'Update an employee role': 
       await updateEmployeeRole();
       mainMenu();
       break;
