@@ -1,13 +1,13 @@
 const inquirer = require('inquirer');
 const {
   viewAllDepartments,
-  viewAllRoles, 
+  viewAllRole, 
   viewAllEmployees, 
   addDepartment, 
   addRole, 
   addEmployee, 
   updateEmployeeRole, 
-  menu 
+  menu
 } = require('./modules/prompts');
 
 const mainMenu = async () => {
@@ -16,16 +16,16 @@ const mainMenu = async () => {
       type: 'list',
       message: 'What would you like to do?',
       name: 'userInput',
-      choices: ["View all departments","View all roles","View all employees","Add a department","Add a role","Add an employee","Update an employee role","Main Menu"]
+      choices: ["View all departments", "View all roles","View all employees","Add a department","Add a roles","Add an employee","Update an employee roles","Main Menu"]
     },
   ]);
 
-  switch (userInput.userInput||menu.choices) {
+  switch (userInput.userInput) {
     case 'View all departments': 
       viewAllDepartments();
       break;
     case 'View all roles': 
-      viewAllRoles();
+      viewAllRole();
       break;
     case 'View all employees':
       viewAllEmployees();
@@ -33,13 +33,13 @@ const mainMenu = async () => {
     case 'Add a department': 
       addDepartment();
       break;
-    case 'Add a role': 
+    case 'Add a roles': 
       addRole();
       break;
     case 'Add an employee': 
       addEmployee();
       break;
-    case 'Update an employee role': 
+    case 'Update an employee roles': 
       updateEmployeeRole();
       break;
     case 'Main menu':
@@ -49,3 +49,6 @@ const mainMenu = async () => {
 };
 
 mainMenu();
+
+module.exports = { mainMenu }
+// ["View all departments","View all role","View all employees","Add a department","Add a role","Add an employee","Update an employee role","Main Menu"]
