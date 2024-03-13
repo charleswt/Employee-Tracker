@@ -1,28 +1,28 @@
-const inquirer = require('inquirer');
+const { default: inquirer } = import('inquirer')
 const { viewAllDepartmentsQuery, viewAllRoleQuery, viewAllEmployeesQuery, addDepartmentQuery, addRoleQuery, addEmployeeQuery, updateEmployeeRoleQuery } = require('./sqlCommands')
 
 const viewAllDepartments = async ()=>{
     try{
     const departmentsPrompt = await viewAllDepartmentsQuery();
-    console.log(departmentsPrompt)
-}catch(err){
-    return menu()
+    console.table(departmentsPrompt)
+}catch(e){
+    console.log(e)
 }
 }
 const viewAllRole = async ()=>{
     try{
     const rolePrompt = await viewAllRoleQuery();
     console.table(rolePrompt)
-}catch(err){
-    return menu()
+}catch(e){
+    console.log(e)
 }
 }
 const viewAllEmployees = async ()=>{
     try{
     const dEmployeesPrompt = await viewAllEmployeesQuery();
     console.log(dEmployeesPrompt);
-}catch(err){
-    return menu()
+}catch(e){
+    console.log(e)
 }
 }
 const addDepartment = async ()=>{
@@ -36,6 +36,7 @@ const addDepartment = async ()=>{
     await addDepartmentQuery({ add_Department })
 }
 const addRole = async ()=>{
+    try{
     const departmentForRole = await viewAllDepartmentsQuery()
     const { add_Role, add_Role_Salary, add_Role_Id } = await inquirer.prompt([
         {
@@ -60,8 +61,12 @@ const addRole = async ()=>{
 
     ])
     await addRoleQuery({ add_Role, add_Role_Salary, add_Role_Id })
+}catch(e){
+    console.log(e)
+}
 }
 const addEmployee = async ()=>{
+    try{
     const roleForEmployee = await viewAllroleQuery()
     const { add_Employee_FirstName, add_Employee_LastName, add_Employee_roleId,add_Employee_ManagerId } = await inquirer.prompt([
         {
@@ -90,8 +95,12 @@ const addEmployee = async ()=>{
         },
     ])
     await addEmployeeQuery({ add_Employee_FirstName, add_Employee_LastName, add_Employee_roleId,add_Employee_ManagerId })
+}catch(e){
+    console.log(e)
+}
 }
 const updateEmployeeRole = async ()=>{
+    try{
     const viewEmployeeToUpdate = await viewAllEmployeesQuery()
     const roleForEmployee = await viewAllRoleQuery()
     const { select_employee, update_Employee_roleId } = await inquirer.prompt([
@@ -115,24 +124,10 @@ const updateEmployeeRole = async ()=>{
         },
     ])
     await updateEmployeeRoleQuery({ select_employee, update_Employee_roleId })
+}catch(e){
+    console.log(e)
 }
-
-const menu = async (errorMessage = 'Error retrieving data table, press ENTER to return to the main menu.') => {
-    await inquirer.prompt([
-      {
-        type: 'input',
-        name: 'menu',
-        message: errorMessage,
-        choices: ['Main menu'],
-      },
-    ]);
-  
-    const { menu } = answers;
-  
-    if (menu === 'Main menu') {
-      return mainMenu();
-    }
-  };
+}
 
 module.exports = { 
     viewAllDepartments,
@@ -141,6 +136,11 @@ module.exports = {
     addDepartment, 
     addRole, 
     addEmployee, 
-    updateEmployeeRole, 
-    menu
+    updateEmployeeRole,
+    viewAllRole, 
+    viewAllEmployees, 
+    addDepartment, 
+    addRole, 
+    addEmployee, 
+    updateEmployeeRole
 };

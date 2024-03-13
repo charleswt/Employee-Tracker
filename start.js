@@ -1,4 +1,3 @@
-const inquirer = require('inquirer');
 const {
   viewAllDepartments,
   viewAllRole, 
@@ -6,43 +5,47 @@ const {
   addDepartment, 
   addRole, 
   addEmployee, 
-  updateEmployeeRole, 
-  menu
+  updateEmployeeRole
 } = require('./modules/prompts');
 
 const mainMenu = async () => {
+  const { default: inquirer } = await import('inquirer')
   const userInput = await inquirer.prompt([
     {
       type: 'list',
       message: 'What would you like to do?',
       name: 'userInput',
-      choices: ["View all departments", "View all roles","View all employees","Add a department","Add a roles","Add an employee","Update an employee roles","Main Menu"]
+      choices: ["View all departments", "View all roles","View all employees","Add a department","Add a roles","Add an employee","Update an employee roles"]
     },
   ]);
 
   switch (userInput.userInput) {
     case 'View all departments': 
-      viewAllDepartments();
+      await viewAllDepartments();
+      mainMenu();
       break;
     case 'View all roles': 
-      viewAllRole();
+      await viewAllRole();
+      mainMenu();
       break;
     case 'View all employees':
-      viewAllEmployees();
+      await viewAllEmployees();
+      mainMenu();
       break;
     case 'Add a department': 
-      addDepartment();
+      await addDepartment();
+      mainMenu();
       break;
     case 'Add a roles': 
-      addRole();
+      await addRole();
+      mainMenu();
       break;
     case 'Add an employee': 
-      addEmployee();
+      await addEmployee();
+      mainMenu();
       break;
     case 'Update an employee roles': 
-      updateEmployeeRole();
-      break;
-    case 'Main menu':
+      await updateEmployeeRole();
       mainMenu();
       break;
   }
@@ -51,4 +54,3 @@ const mainMenu = async () => {
 mainMenu();
 
 module.exports = { mainMenu }
-// ["View all departments","View all role","View all employees","Add a department","Add a role","Add an employee","Update an employee role","Main Menu"]
