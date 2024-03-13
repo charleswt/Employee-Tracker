@@ -35,10 +35,7 @@ const addDepartment = async () => {
             },
         ]);
         
-        if (add_Department) {
-            await addDepartmentQuery(add_Department);
-        }
-        
+        await addDepartmentQuery(add_Department);
         console.table(await viewAllDepartments());
     } catch (e) {
         console.log(e);
