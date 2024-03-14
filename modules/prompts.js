@@ -130,7 +130,7 @@ const updateEmployeeRole = async ()=>{
             name: 'update_Employee_roleId',
             message: 'Choose employee role id:',
             choices: roleForEmployee.map((role) => ({
-            name: role.name,
+            name: role.title,
             value: role.id,
             }))
         },

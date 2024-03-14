@@ -63,7 +63,8 @@ const addEmployeeQuery = async (add_Employee_FirstName, add_Employee_LastName, a
 const updateEmployeeRoleQuery = async (update_Employee_roleId, select_employee) => {
     const query = 'UPDATE employee SET role_id = ? WHERE id = ?';
   try {
-    const updateEmployee = await sqlDb.query(query, [update_Employee_roleId, select_employee]);
+    console.log(update_Employee_roleId, select_employee)
+    const updateEmployee = await sqlDb.query(query, [select_employee, update_Employee_roleId]);
     return updateEmployee[0];
   } catch (err) {
     console.error('Error updating employee role:', err);
